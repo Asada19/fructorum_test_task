@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 import os
+from datetime import timedelta
 from pathlib import Path
 
 from dotenv import load_dotenv
@@ -45,7 +46,7 @@ INSTALLED_APPS = [
     "rest_framework.authtoken",
     "djoser",
     "drf_yasg",
-    # 'apps.users',
+    "apps.users",
     # 'apps.bookmark',
 ]
 
@@ -88,7 +89,36 @@ REST_FRAMEWORK = {
 
 SIMPLE_JWT = {
     "AUTH_HEADER_TYPES": ("JWT",),
+    "ACCESS_TOKEN_LIFETIME": timedelta(hours=3),
 }
+
+SWAGGER_SETTINGS = {
+    "SECURITY_DEFINITIONS": {
+        "JWT": {"type": "apiKey", "name": "Authorization", "in": "header"}
+    },
+    "PERSIST_AUTH": True,
+    "USE_SESSION_AUTH": True,
+}
+
+
+DJOSER = {
+    "PASSWORD_RESET_CONFIRM_URL": "#/reset_password_confirm/{uid}/{token}",
+    "USERNAME_RESET_CONFIRM_URL": "#/username/reset/confirm/{uid}/{token}",
+    "ACTIVATION_URL": "#/activate/{uid}/{token}",
+    "SEND_ACTIVATION_EMAIL": False,
+    "SERIALIZERS": {
+        "user_create": "apps.users.api.serializers.UserCreateSerializer",
+    },
+}
+
+
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+# EMAIL_USE_TLS = True
+# EMAIL_HOST = "smtp.gmail.com"
+# EMAIL_HOST_USER = os.environ.get("EMAIL_HOST")
+# EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_PASSWORD")
+# EMAIL_PORT = 587
+
 
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
