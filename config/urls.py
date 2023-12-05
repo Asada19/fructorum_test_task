@@ -23,7 +23,7 @@ schema_view = get_schema_view(
     openapi.Info(
         title="Snippets API",
         default_version="v1",
-        description="Test description",
+        description="Test task for fructorum",
     ),
     public=True,
 )
@@ -33,5 +33,6 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("auth/", include("djoser.urls")),
     path("auth/", include("djoser.urls.jwt")),
+    path("api/", include("apps.bookmark.urls")),
     path("", schema_view.with_ui("swagger", cache_timeout=0), name="schema-swagger-ui"),
 ]
