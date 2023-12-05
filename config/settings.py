@@ -47,7 +47,7 @@ INSTALLED_APPS = [
     "djoser",
     "drf_yasg",
     "apps.users",
-    # 'apps.bookmark',
+    "apps.bookmark",
 ]
 
 MIDDLEWARE = [
