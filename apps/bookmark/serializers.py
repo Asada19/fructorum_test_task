@@ -42,9 +42,23 @@ class BookmarkSerializer(serializers.ModelSerializer):
 
 class CollectionSerializer(serializers.ModelSerializer):
     bookmarks = serializers.PrimaryKeyRelatedField(
-        queryset=Bookmark.objects.all(), many=True, read_only=False
+        queryset=Bookmark.objects.all(), many=True, required=False
     )
 
     class Meta:
         model = Collection
-        fields = "__all__"
+        fields = [
+            "id",
+            "title",
+            "description",
+            "created_at",
+            "updated_at",
+            "bookmarks",
+            "user",
+        ]
+        read_only_fields = [
+            "id",
+            "created_at",
+            "updated_at",
+            "user",
+        ]

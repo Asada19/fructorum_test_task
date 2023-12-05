@@ -113,11 +113,6 @@ DJOSER = {
 
 
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
-# EMAIL_USE_TLS = True
-# EMAIL_HOST = "smtp.gmail.com"
-# EMAIL_HOST_USER = os.environ.get("EMAIL_HOST")
-# EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_PASSWORD")
-# EMAIL_PORT = 587
 
 
 # Database
@@ -159,7 +154,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = "ru"
 
-TIME_ZONE = "UTC"
+TIME_ZONE = "Europe/Moscow"
 
 USE_I18N = True
 

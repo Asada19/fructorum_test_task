@@ -1,3 +1,4 @@
+# isort:skip_file
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
 from rest_framework.permissions import IsAuthenticated
 
@@ -36,14 +37,14 @@ class CollectionListCreateAPIView(ListCreateAPIView):
     model = Collection
     queryset = Collection.objects.all()
     serializer_class = CollectionSerializer
-    permission_classes = (IsAuthenticated, IsOwner)
+    permission_classes = (IsAuthenticated,)
 
     def perform_create(self, serializer):
-        serializer.save(user=self.request.user, args=self.request.data)
+        serializer.save(user=self.request.user)
 
 
 class CollectionDetailAPIView(RetrieveUpdateDestroyAPIView):
     model = Collection
     queryset = Collection.objects.all()
     serializer_class = CollectionSerializer
-    permission_classes = (IsAuthenticated,)
+    permission_classes = (IsAuthenticated, IsOwner)
